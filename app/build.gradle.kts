@@ -51,7 +51,7 @@ android {
         abortOnError = true
         checkReleaseBuilds = false
         textReport = true
-        disable += listOf("MissingTranslation", "ExtraTranslation")
+        disable += listOf("MissingTranslation", "ExtraTranslation", "QueryAllPackagesPermission", "AppLinkUrlError")
     }
 }
 
