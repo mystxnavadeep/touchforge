@@ -69,10 +69,18 @@ class GameMonitor @Inject constructor(
 
     fun hasUsageAccess(): Boolean {
         val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
-        val mode = appOps.unsafeCheckOpNoThrow(
-            android.app.AppOpsManager.OPSTR_GET_USAGE_STATS,
-            android.os.Process.myUid(), context.packageName,
-        )
+        val mode = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            appOps.unsafeCheckOpNoThrow(
+                android.app.AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), context.packageName,
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            appOps.checkOpNoThrow(
+                android.app.AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), context.packageName,
+            )
+        }
         return mode == android.app.AppOpsManager.MODE_ALLOWED
     }
 
@@ -92,7 +100,8 @@ class GameMonitor @Inject constructor(
                 val e = UsageEvents.Event()
                 while (events?.hasNextEvent() == true) {
                     events.getNextEvent(e)
-                    if (e.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                    @Suppress("DEPRECATION")
+                    if (e.eventType == UsageEvents.Event.MOVE_TO_FOREGROUND) {
                         foreground = e.packageName
                     }
                 }

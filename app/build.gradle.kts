@@ -50,6 +50,7 @@ android {
     lint {
         abortOnError = true
         checkReleaseBuilds = false
+        textReport = true
         disable += listOf("MissingTranslation", "ExtraTranslation")
     }
 }
