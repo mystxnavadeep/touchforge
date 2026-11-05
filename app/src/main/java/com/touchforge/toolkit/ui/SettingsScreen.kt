@@ -264,7 +264,7 @@ fun SettingsScreen(
                     text = "Trim Background Memory",
                     onClick = {
                         vm.memoryTrim {
-                            Toast.makeText(ctx, stringResource(R.string.tweak_cleaned), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(ctx, ctx.getString(R.string.tweak_cleaned), Toast.LENGTH_SHORT).show()
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
