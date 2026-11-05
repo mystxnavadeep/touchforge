@@ -5,6 +5,7 @@
 #include <jni.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <cstdint>
 #include <cstring>
 #include <string>
 #include <atomic>
@@ -18,7 +19,7 @@ std::atomic<int> g_fd{-1};
 std::atomic<bool> g_grabbing{false};
 
 bool ioctlGrab(int fd, bool grab) {
-    return ioctl(fd, EVIOCGRAB, static_cast<void*>(grab ? 1 : 0)) == 0;
+    return ioctl(fd, EVIOCGRAB, reinterpret_cast<void*>(static_cast<uintptr_t>(grab ? 1 : 0))) == 0;
 }
 
 std::string deviceName(int fd) {
