@@ -6,6 +6,7 @@ import android.content.Context
 import com.touchforge.toolkit.core.model.MappingFileV1
 import com.touchforge.toolkit.core.monitor.GameDetector
 import com.touchforge.toolkit.data.ProfileRepository
+import com.touchforge.toolkit.di.ApplicationScope
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -49,7 +50,7 @@ class GameMonitor @Inject constructor(
     @ApplicationContext private val context: Context,
     private val profiles: ProfileRepository,
     private val applier: ProfileApplier,
-    private val externalScope: CoroutineScope,
+    @ApplicationScope private val externalScope: CoroutineScope,
 ) {
     sealed interface MonitorState {
         data object Stopped : MonitorState

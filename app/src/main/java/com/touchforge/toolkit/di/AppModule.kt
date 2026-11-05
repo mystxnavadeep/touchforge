@@ -32,6 +32,10 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun defaultScope(@ApplicationScope scope: CoroutineScope): CoroutineScope = scope
+
+    @Provides
+    @Singleton
     fun database(@ApplicationContext ctx: Context): ToolkitDatabase =
         Room.databaseBuilder(ctx, ToolkitDatabase::class.java, "touchforge.db")
             .fallbackToDestructiveMigration()
@@ -42,9 +46,4 @@ object AppModule {
 
     @Provides
     fun macroDao(db: ToolkitDatabase): MacroDao = db.macroDao()
-
-    @Provides
-    @Singleton
-    fun profileRepository(dao: ProfileDao, macroDao: MacroDao, @ApplicationScope scope: CoroutineScope): ProfileRepository =
-        ProfileRepository(dao, macroDao, scope)
 }

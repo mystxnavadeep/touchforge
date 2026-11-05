@@ -16,6 +16,7 @@ import com.android.billingclient.api.QueryPurchasesParams
 import com.android.billingclient.api.queryProductDetails
 import com.touchforge.toolkit.core.gate.Tier
 import com.touchforge.toolkit.data.SettingsRepository
+import com.touchforge.toolkit.di.ApplicationScope
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,7 +33,7 @@ import javax.inject.Singleton
 class BillingManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val settings: SettingsRepository,
-    private val externalScope: CoroutineScope,
+    @ApplicationScope private val externalScope: CoroutineScope,
 ) : PurchasesUpdatedListener {
 
     data class Product(val id: String, val tier: Tier)

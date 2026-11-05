@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.MotionEvent
 import com.touchforge.toolkit.aidl.TouchSpec
 import com.touchforge.toolkit.core.engine.TriggerEngine
+import com.touchforge.toolkit.di.ApplicationScope
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -23,7 +24,7 @@ class TriggerRunner @Inject constructor(
     @ApplicationContext private val context: Context,
     private val session: SessionManager,
     private val applier: ProfileApplier,
-    private val externalScope: CoroutineScope,
+    @ApplicationScope private val externalScope: CoroutineScope,
 ) {
     private val engine = TriggerEngine()
     private var job: Job? = null

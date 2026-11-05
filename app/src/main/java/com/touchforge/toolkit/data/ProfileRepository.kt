@@ -7,6 +7,7 @@ import com.touchforge.toolkit.data.db.MacroDao
 import com.touchforge.toolkit.data.db.MacroEntity
 import com.touchforge.toolkit.data.db.ProfileDao
 import com.touchforge.toolkit.data.db.ProfileEntity
+import com.touchforge.toolkit.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -23,7 +24,7 @@ private val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
 class ProfileRepository @Inject constructor(
     private val profileDao: ProfileDao,
     private val macroDao: MacroDao,
-    private val externalScope: CoroutineScope,
+    @ApplicationScope private val externalScope: CoroutineScope,
 ) {
     fun observeProfiles(): Flow<List<ProfileEntity>> = profileDao.observeAll()
     fun observeMacros(): Flow<List<MacroEntity>> = macroDao.observeAll()

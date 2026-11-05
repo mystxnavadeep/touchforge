@@ -10,6 +10,7 @@ import com.touchforge.toolkit.aidl.IToolkitService
 import com.touchforge.toolkit.aidl.TouchSpec
 import com.touchforge.toolkit.core.capability.CapabilityPolicy
 import com.touchforge.toolkit.core.capability.CapabilityReport
+import com.touchforge.toolkit.di.ApplicationScope
 import com.touchforge.toolkit.helper.ToolkitUserService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -39,7 +40,7 @@ sealed interface SessionState {
 @Singleton
 class SessionManager @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val externalScope: CoroutineScope,
+    @ApplicationScope private val externalScope: CoroutineScope,
 ) {
     private val _state = MutableStateFlow<SessionState>(SessionState.Idle)
     val state: StateFlow<SessionState> = _state
