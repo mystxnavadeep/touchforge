@@ -25,7 +25,7 @@ class TouchTransformTest {
     @Test
     fun `point in zone scales away from zone center`() {
         // center of zone = (0.25, 0.5); point at (0.25,0.75) -> dy=0.25*2 => 0.25+0.5=... y center 0.5 + (0.75-0.5)*2 = 1.0
-        val r = TouchTransform.apply(250f, 750f, 1000f, 2000f, listOf(zone), emptyList())
+        val r = TouchTransform.apply(250f, 1500f, 1000f, 2000f, listOf(zone), emptyList())
         assertEquals(250f, r.x, 1e-2f)
         assertEquals(2000f, r.y, 1e-2f)
         assertEquals("z1", r.zoneId)
@@ -33,9 +33,9 @@ class TouchTransformTest {
 
     @Test
     fun `zone center maps to itself`() {
-        val r = TouchTransform.apply(250f, 500f, 1000f, 2000f, listOf(zone), emptyList())
+        val r = TouchTransform.apply(250f, 1000f, 1000f, 2000f, listOf(zone), emptyList())
         assertEquals(250f, r.x, 1e-2f)
-        assertEquals(500f, r.y, 1e-2f)
+        assertEquals(1000f, r.y, 1e-2f)
     }
 
     @Test
@@ -78,7 +78,7 @@ class TouchTransformTest {
 
     @Test
     fun `disabled curve is identity factor`() {
-        val r = TouchTransform.apply(250f, 750f, 1000f, 2000f, listOf(zone), emptyList(), AimCurve(enabled = false))
+        val r = TouchTransform.apply(250f, 1500f, 1000f, 2000f, listOf(zone), emptyList(), AimCurve(enabled = false))
         assertEquals(2000f, r.y, 1e-2f)
     }
 }

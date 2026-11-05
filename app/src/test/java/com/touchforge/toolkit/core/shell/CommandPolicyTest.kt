@@ -81,7 +81,7 @@ class MonitorsTest {
     @Test
     fun `cpu busy fraction between snapshots`() {
         val a = CpuStatsParser.parse("cpu  100 0 100 700 0 0 0 0 0 0")!!
-        val b = CpuStatsParser.parse("cpu  200 0 200 800 0 0 0 0 0 0")!!
+        val b = CpuStatsParser.parse("cpu  200 0 200 900 0 0 0 0 0 0")!!
         val f = CpuStatsParser.busyFraction(a, b)
         assertEquals(0.5f, f!!, 1e-4f)
         assertNull(CpuStatsParser.parse("garbage line"))

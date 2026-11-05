@@ -74,8 +74,6 @@ object CapabilityPolicy {
         if (shell && c.canInject) {
             avail(Feature.ZONE_SENSITIVITY_ON_INJECTED_TOUCH, "engine")
             avail(Feature.TRIGGERS_AUTOTAP, "injected taps")
-            if (m[Feature.ZONE_SENSITIVITY_ON_PHYSICAL_TOUCH]?.availability == Availability.FALLBACK)
-                fallback(Feature.TRIGGERS_AUTOTAP, "injected taps", "injection-only mode")
             avail(Feature.MACROS, if (c.canGrabRawInput) "record+playback" else "playback (injected)")
             avail(Feature.KEY_MAPPING, "overlay buttons + injected taps")
         } else {

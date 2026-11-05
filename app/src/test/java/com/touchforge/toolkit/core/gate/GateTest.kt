@@ -46,7 +46,7 @@ class CreditLedgerTest {
 
     @Test
     fun `claim blocked during cooldown then allowed`() {
-        val s0 = CreditState()
+        val s0 = CreditState(lastClaimMs = now)
         assertNull(ledger.claim(s0)) // immediate claim blocked
         now += CreditState.CLAIM_COOLDOWN_MS
         val s1 = ledger.claim(s0)!!

@@ -20,7 +20,7 @@ class MacroRecorder {
         t0 = nowMs
         if (steps.isNotEmpty() && steps.last().type == MacroStepType.SLEEP) {
             steps[steps.size - 1] = steps.last().copy(delayMs = steps.last().delayMs + delay)
-        } else if (delay > 0 && steps.isNotEmpty()) {
+        } else if (delay > 0 && steps.isNotEmpty() && steps.last().type == MacroStepType.UP) {
             steps += MacroStep(MacroStepType.SLEEP, delayMs = delay)
         }
         steps += MacroStep(type, x, y)
