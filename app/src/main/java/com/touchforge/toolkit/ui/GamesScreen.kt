@@ -48,6 +48,7 @@ import com.touchforge.toolkit.core.model.MappingFileV1
 import com.touchforge.toolkit.core.model.SensitivityZone
 import com.touchforge.toolkit.data.ProfileRepository
 import com.touchforge.toolkit.data.db.ProfileEntity
+import com.touchforge.toolkit.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
