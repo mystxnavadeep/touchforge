@@ -81,4 +81,23 @@ class TouchTransformTest {
         val r = TouchTransform.apply(250f, 1500f, 1000f, 2000f, listOf(zone), emptyList(), AimCurve(enabled = false))
         assertEquals(2000f, r.y, 1e-2f)
     }
+
+    @Test
+    fun `circular target hit test and displacement`() {
+        // Target center at (0.8, 0.8) on 1000x1000 screen => (800, 800), radius 0.1 => 100px.
+        // Point at (850, 800) is within radius (dx=50). Sensitivity is 3x.
+        // Expected displacement: 800 + (850 - 800) * 3 = 950
+        val r = TouchTransform.apply(850f, 800f, 1000f, 1000f, emptyList(), listOf(target))
+        assertEquals("t1", r.zoneId)
+        assertEquals(950f, r.x, 1e-2f)
+        assertEquals(800f, r.y, 1e-2f)
+    }
+
+    @Test
+    fun `linear curve preset maps proportionally`() {
+        val linear = AimCurve(enabled = true, x1 = 0.25f, y1 = 0.25f, x2 = 0.75f, y2 = 0.75f)
+        assertEquals(0.5f, AimCurveMath.shape(0.5f, linear), 1e-2f)
+        assertEquals(0.2f, AimCurveMath.shape(0.2f, linear), 1e-2f)
+        assertEquals(0.8f, AimCurveMath.shape(0.8f, linear), 1e-2f)
+    }
 }

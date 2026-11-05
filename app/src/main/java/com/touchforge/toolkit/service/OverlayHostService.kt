@@ -257,7 +257,7 @@ private fun View.setTouchDragListener(listener: DragListener) {
     }
 }
 
-/** Original crosshair rendering: two hairlines + center dot, fully user-styled. */
+/** Original crosshair rendering: multi-style crosshair, fully user-styled. */
 private class CrosshairView(context: Context) : View(context) {
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var config: CrosshairSettings = CrosshairSettings(enabled = true, x = 0.5f, y = 0.5f, size = 0.06f, color = 0xFF00E5FF, opacity = 0.9f)
@@ -268,13 +268,57 @@ private class CrosshairView(context: Context) : View(context) {
         val cfg = config
         paint.color = cfg.color.toInt()
         paint.alpha = (cfg.opacity * 255).toInt().coerceIn(0, 255)
-        paint.strokeWidth = (width * 0.02f).coerceAtLeast(1f)
+        paint.strokeWidth = (width * 0.03f).coerceAtLeast(1.5f)
+        paint.style = Paint.Style.STROKE
+
         val arm = width * 0.42f
-        canvas.drawLine(cx - arm, cy, cx - width * 0.15f, cy, paint)
-        canvas.drawLine(cx + width * 0.15f, cy, cx + arm, cy, paint)
-        canvas.drawLine(cx, cy - arm, cx, cy - height * 0.15f, paint)
-        canvas.drawLine(cx, cy + height * 0.15f, cx, cy + arm, paint)
-        canvas.drawCircle(cx, cy, width * 0.06f, paint)
+        val gap = width * 0.12f
+
+        when (cfg.style) {
+            1 -> { // Dot only
+                paint.style = Paint.Style.FILL
+                canvas.drawCircle(cx, cy, width * 0.12f, paint)
+            }
+            2 -> { // Cross + Dot
+                paint.style = Paint.Style.STROKE
+                canvas.drawLine(cx - arm, cy, cx - gap, cy, paint)
+                canvas.drawLine(cx + gap, cy, cx + arm, cy, paint)
+                canvas.drawLine(cx, cy - arm, cx, cy - gap, paint)
+                canvas.drawLine(cx, cy + gap, cx, cy + arm, paint)
+                paint.style = Paint.Style.FILL
+                canvas.drawCircle(cx, cy, width * 0.06f, paint)
+            }
+            3 -> { // T-Bar
+                paint.style = Paint.Style.STROKE
+                canvas.drawLine(cx - arm, cy, cx - gap, cy, paint)
+                canvas.drawLine(cx + gap, cy, cx + arm, cy, paint)
+                canvas.drawLine(cx, cy + gap, cx, cy + arm, paint)
+                paint.style = Paint.Style.FILL
+                canvas.drawCircle(cx, cy, width * 0.05f, paint)
+            }
+            4 -> { // Chevron
+                paint.style = Paint.Style.STROKE
+                canvas.drawLine(cx - arm * 0.6f, cy + arm * 0.6f, cx, cy, paint)
+                canvas.drawLine(cx, cy, cx + arm * 0.6f, cy + arm * 0.6f, paint)
+                paint.style = Paint.Style.FILL
+                canvas.drawCircle(cx, cy + arm * 0.3f, width * 0.04f, paint)
+            }
+            5 -> { // Circle Reticle
+                paint.style = Paint.Style.STROKE
+                canvas.drawCircle(cx, cy, width * 0.32f, paint)
+                paint.style = Paint.Style.FILL
+                canvas.drawCircle(cx, cy, width * 0.06f, paint)
+            }
+            else -> { // 0: Classic Cross
+                paint.style = Paint.Style.STROKE
+                canvas.drawLine(cx - arm, cy, cx - gap * 1.3f, cy, paint)
+                canvas.drawLine(cx + gap * 1.3f, cy, cx + arm, cy, paint)
+                canvas.drawLine(cx, cy - arm, cx, cy - gap * 1.3f, paint)
+                canvas.drawLine(cx, cy + gap * 1.3f, cx, cy + arm, paint)
+                paint.style = Paint.Style.FILL
+                canvas.drawCircle(cx, cy, width * 0.05f, paint)
+            }
+        }
     }
 }
 

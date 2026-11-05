@@ -88,6 +88,18 @@ class ProfileRepository @Inject constructor(
 
     suspend fun exportProfile(pkg: String): String? = get(pkg)?.let { MappingSchema.serialize(it.second) }
 
+    suspend fun duplicate(pkg: String, targetPkg: String, targetName: String): SaveResult {
+        val existing = get(pkg) ?: return SaveResult.Invalid(emptyList())
+        return saveProfile(targetPkg, targetName, existing.second.copy(name = targetName, packageName = targetPkg))
+    }
+
+    suspend fun listMacros(): List<MacroDef> {
+        val entities = macroDao.observeAll().first()
+        return entities.mapNotNull {
+            runCatching { json.decodeFromString<MacroDef>(it.macroJson) }.getOrNull()
+        }
+    }
+
     fun saveMacro(macro: MacroDef) {
         externalScope.launch {
             macroDao.upsert(MacroEntity(macro.id, macro.name, json.encodeToString(macro), System.currentTimeMillis()))

@@ -102,4 +102,122 @@
     <string name="notif_channel">TouchForge session</string>
     <string name="notif_title">TouchForge active</string>
     <string name="notif_text">Toolkit session running. Tap to stop from the app.</string>
+
+    <!-- Navigation & Hub -->
+    <string name="tool_zones">Touch Zones</string>
+    <string name="tool_aim_curve">Aim Curve</string>
+    <string name="tool_triggers">Rapid Triggers</string>
+    <string name="tool_keymap">Key Mapping</string>
+    <string name="tool_macros">Macro Studio</string>
+    <string name="tool_crosshair">Crosshair Studio</string>
+    <string name="tool_hud">Performance HUD</string>
+    <string name="tool_cleaner">RAM Cleaner</string>
+    <string name="tool_resolution">Resolution Scale</string>
+    <string name="recent_games">Recent Games</string>
+    <string name="quick_tools">Toolkit Hub</string>
+    <string name="active_game_banner">Active Game: %1$s</string>
+    <string name="no_active_game">No active game detected</string>
+    <string name="setup_required_title">Setup Checklist</string>
+    <string name="setup_all_ready">All systems operational</string>
+
+    <!-- Aim Curve -->
+    <string name="aim_curve_title">Aim Response Curve</string>
+    <string name="curve_enabled">Enable Curve Transformation</string>
+    <string name="curve_desc">Piecewise-cubic Bezier acceleration curve transforms micro-aim precision while ramping up speed for flick shots.</string>
+    <string name="curve_linear">Linear</string>
+    <string name="curve_precision">Precision</string>
+    <string name="curve_snap">Fast Snap</string>
+    <string name="curve_scurve">S-Curve</string>
+    <string name="curve_reset">Reset</string>
+    <string name="curve_test_pad">Interactive Curve Test Pad</string>
+    <string name="curve_test_hint">Drag here to feel transformed displacement live</string>
+
+    <!-- Triggers / Auto-Tap -->
+    <string name="trigger_studio_title">Rapid Trigger / Auto-Tap</string>
+    <string name="trigger_desc">Configures high-speed synthetic touch sequences for semi-auto weapons and repetitive tap actions.</string>
+    <string name="trigger_interval">Tap Interval (%1$d ms)</string>
+    <string name="trigger_duration">Tap Duration (%1$d ms)</string>
+    <string name="trigger_while_held">Repeat while held</string>
+    <string name="trigger_fixed_count">Fixed tap burst</string>
+    <string name="trigger_test_pad">Trigger Test Pad (Hold Down)</string>
+    <string name="trigger_rate_label">%1$.1f taps / sec</string>
+    <string name="trigger_add_new">Add Trigger Zone</string>
+    <string name="trigger_safety_note">Safety Guard: Burst rates are bounded within tier limits to prevent framework input queue throttling.</string>
+
+    <!-- Key Mapping -->
+    <string name="keymap_studio_title">Key Mapping Studio</string>
+    <string name="keymap_desc">Map hardware controller, keyboard, or volume buttons to on-screen touch positions.</string>
+    <string name="keymap_add_button">Add Button</string>
+    <string name="keymap_label">Button Label</string>
+    <string name="keymap_keycode">Key Code</string>
+    <string name="keymap_opacity">Visual Opacity</string>
+    <string name="keymap_size">Button Size</string>
+    <string name="keymap_empty">No virtual keys mapped yet. Tap Add Button to place one.</string>
+
+    <!-- Macros -->
+    <string name="macro_studio_title">Macro Studio</string>
+    <string name="macro_desc">Record and execute complex multi-step touch combos with microsecond timing accuracy.</string>
+    <string name="macro_create">New Macro</string>
+    <string name="macro_record">Record Touch</string>
+    <string name="macro_stop_record">Stop Recording</string>
+    <string name="macro_play">Play</string>
+    <string name="macro_stop_play">Stop</string>
+    <string name="macro_loop">Loop Playback</string>
+    <string name="macro_add_step">Add Step</string>
+    <string name="macro_steps_count">%1$d steps · %2$d ms total</string>
+    <string name="macro_record_hint">Tap and swipe in the area below to capture gestures</string>
+    <string name="macro_empty">No macros created. Tap New Macro to start recording.</string>
+
+    <!-- Crosshair Studio -->
+    <string name="crosshair_studio_title">Crosshair Studio</string>
+    <string name="crosshair_style">Reticle Style</string>
+    <string name="crosshair_style_classic">Classic Cross</string>
+    <string name="crosshair_style_dot">Precision Dot</string>
+    <string name="crosshair_style_crossdot">Cross + Dot</string>
+    <string name="crosshair_style_tbar">T-Bar Reticle</string>
+    <string name="crosshair_style_chevron">Tactical Chevron</string>
+    <string name="crosshair_style_circlebox">Circle Reticle</string>
+    <string name="crosshair_color">Color Accent</string>
+    <string name="crosshair_recenter">Recenter (0, 0)</string>
+    <string name="crosshair_nudge_up">▲</string>
+    <string name="crosshair_nudge_down">▼</string>
+    <string name="crosshair_nudge_left">◀</string>
+    <string name="crosshair_nudge_right">▶</string>
+
+    <!-- Performance HUD Studio -->
+    <string name="hud_studio_title">Performance HUD Studio</string>
+    <string name="hud_show_cpu">CPU Utilization</string>
+    <string name="hud_show_ram">RAM Utilization</string>
+    <string name="hud_show_fps">FPS (Choreographer Estimate)</string>
+    <string name="hud_show_battery">Battery Percentage</string>
+    <string name="hud_pos_topleft">Top-Left</string>
+    <string name="hud_pos_topright">Top-Right</string>
+    <string name="hud_pos_bottomleft">Bottom-Left</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Welcome to TouchForge</string>
+    <string name="onboarding_subtitle">The independent, high-performance touch sensitivity &amp; gaming toolkit for Android.</string>
+    <string name="onboarding_perm_overlay">Overlay Display</string>
+    <string name="onboarding_perm_overlay_desc">Allows TouchForge to render custom crosshairs, drag zones, and floating HUD.</string>
+    <string name="onboarding_perm_usage">Usage Access</string>
+    <string name="onboarding_perm_usage_desc">Enables automatic game detection to activate profiles when games launch.</string>
+    <string name="onboarding_perm_shizuku">Shizuku Privilege</string>
+    <string name="onboarding_perm_shizuku_desc">Provides shell privileges for low-latency touch injection without needing root.</string>
+    <string name="onboarding_grant">Grant</string>
+    <string name="onboarding_granted">Granted</string>
+    <string name="onboarding_start">Enter TouchForge</string>
+
+    <!-- Game Library Extras -->
+    <string name="game_launch">Launch Game</string>
+    <string name="game_details">Details</string>
+    <string name="game_duplicate">Duplicate Profile</string>
+    <string name="game_search_hint">Search installed games…</string>
+    <string name="game_stats_summary">%1$d Zones · %2$d Triggers · %3$d Keys</string>
+
+    <!-- Device Tweaks -->
+    <string name="tweak_pointer_loc">Pointer Location</string>
+    <string name="tweak_accidental_touch">Accidental Touch Guard</string>
+    <string name="tweak_memory_clean">Memory Boost</string>
+    <string name="tweak_cleaning">Trimming background apps…</string>
+    <string name="tweak_cleaned">Background memory trimmed successfully</string>
 </resources>

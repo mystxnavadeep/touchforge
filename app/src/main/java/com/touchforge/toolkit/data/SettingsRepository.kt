@@ -43,6 +43,11 @@ class SettingsRepository @Inject constructor(@ApplicationContext private val con
         val crosshairSize = floatPreferencesKey("crosshair_size")
         val crosshairColor = longPreferencesKey("crosshair_color")
         val crosshairOpacity = floatPreferencesKey("crosshair_opacity")
+        val crosshairStyle = intPreferencesKey("crosshair_style")
+        val hudPosition = intPreferencesKey("hud_position")
+        val onboardingDone = booleanPreferencesKey("onboarding_done")
+        val pointerLocation = booleanPreferencesKey("pointer_location")
+        val accidentalTouch = booleanPreferencesKey("accidental_touch")
         val showTouchesRestore = stringPreferencesKey("restore_show_touches")
         val pointerLocRestore = stringPreferencesKey("restore_pointer_location")
         val resolutionRestore = stringPreferencesKey("restore_resolution")
@@ -69,6 +74,7 @@ class SettingsRepository @Inject constructor(@ApplicationContext private val con
             showFps = p[K.hudShowFps] ?: true,
             showBattery = p[K.hudShowBattery] ?: true,
             opacity = p[K.hudOpacity] ?: 0.8f,
+            position = p[K.hudPosition] ?: 0,
         )
     }
 
@@ -80,9 +86,13 @@ class SettingsRepository @Inject constructor(@ApplicationContext private val con
             size = p[K.crosshairSize] ?: 0.06f,
             color = p[K.crosshairColor] ?: 0xFF00E5FF,
             opacity = p[K.crosshairOpacity] ?: 0.9f,
+            style = p[K.crosshairStyle] ?: 0,
         )
     }
 
+    val onboardingCompleted: Flow<Boolean> = context.dataStore.data.map { it[K.onboardingDone] ?: false }
+    val pointerLocationEnabled: Flow<Boolean> = context.dataStore.data.map { it[K.pointerLocation] ?: false }
+    val accidentalTouchGuard: Flow<Boolean> = context.dataStore.data.map { it[K.accidentalTouch] ?: false }
     val adsEnabled: Flow<Boolean> = context.dataStore.data.map { it[K.adsEnabled] ?: false }
     val updateCheckUrl: Flow<String> = context.dataStore.data.map { it[K.updateCheckUrl] ?: "" }
 
@@ -95,11 +105,16 @@ class SettingsRepository @Inject constructor(@ApplicationContext private val con
         it[K.hudEnabled] = s.enabled; it[K.hudIntervalMs] = s.intervalMs
         it[K.hudShowCpu] = s.showCpu; it[K.hudShowRam] = s.showRam
         it[K.hudShowFps] = s.showFps; it[K.hudShowBattery] = s.showBattery; it[K.hudOpacity] = s.opacity
+        it[K.hudPosition] = s.position
     }
     suspend fun setCrosshair(s: CrosshairSettings) = context.dataStore.edit {
         it[K.crosshairEnabled] = s.enabled; it[K.crosshairX] = s.x; it[K.crosshairY] = s.y
         it[K.crosshairSize] = s.size; it[K.crosshairColor] = s.color; it[K.crosshairOpacity] = s.opacity
+        it[K.crosshairStyle] = s.style
     }
+    suspend fun setOnboardingCompleted(v: Boolean) = context.dataStore.edit { it[K.onboardingDone] = v }
+    suspend fun setPointerLocationEnabled(v: Boolean) = context.dataStore.edit { it[K.pointerLocation] = v }
+    suspend fun setAccidentalTouchGuard(v: Boolean) = context.dataStore.edit { it[K.accidentalTouch] = v }
     suspend fun setAdsEnabled(v: Boolean) = context.dataStore.edit { it[K.adsEnabled] = v }
     suspend fun setUpdateCheckUrl(v: String) = context.dataStore.edit { it[K.updateCheckUrl] = v }
 
@@ -120,6 +135,7 @@ data class HudSettings(
     val showFps: Boolean,
     val showBattery: Boolean,
     val opacity: Float,
+    val position: Int = 0,
 )
 
 data class CrosshairSettings(
@@ -129,4 +145,5 @@ data class CrosshairSettings(
     val size: Float,
     val color: Long,
     val opacity: Float,
+    val style: Int = 0,
 )
