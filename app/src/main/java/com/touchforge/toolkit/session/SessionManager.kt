@@ -8,8 +8,8 @@ import android.os.IBinder
 import android.provider.Settings
 import com.touchforge.toolkit.aidl.IToolkitService
 import com.touchforge.toolkit.aidl.TouchSpec
-import com.touchforge.toolkit.capability.CapabilityReport
 import com.touchforge.toolkit.core.capability.CapabilityPolicy
+import com.touchforge.toolkit.core.capability.CapabilityReport
 import com.touchforge.toolkit.helper.ToolkitUserService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -151,7 +151,7 @@ class SessionManager @Inject constructor(
         emergencyRestore()
         runCatching { service?.shutdown() }
         runCatching {
-            userServiceArgs?.let { Shizuku.unbindUserService(it, connection) }
+            userServiceArgs?.let { Shizuku.unbindUserService(it, connection, true) }
         }
         service = null
         _state.value = SessionState.Idle

@@ -12,7 +12,7 @@ class TriggerEngine(private val clock: () -> Long = System::currentTimeMillis) {
 
     data class Tap(val x: Float, val y: Float, val down: Boolean, val atMs: Long)
 
-    private data class Active(val zone: TriggerZone, val x: Float, val y: Float, val startMs: Long, val fired: Int, var phase: Boolean)
+    private data class Active(val zone: TriggerZone, val x: Float, val y: Float, val startMs: Long, var fired: Int, var phase: Boolean)
 
     private val active = HashMap<Int, Active>() // pointer id -> active trigger
 
@@ -31,25 +31,31 @@ class TriggerEngine(private val clock: () -> Long = System::currentTimeMillis) {
     /** Actions that should be executed now (called from a periodic pump, ~1ms..interval). */
     fun due(nowMs: Long = clock()): List<Tap> {
         val out = ArrayList<Tap>()
+        val finished = ArrayList<Int>()
         for ((pid, a) in active) {
-            val deadline = when (a.zone.repeat) {
-                TriggerRepeat.WHILE_HELD -> Long.MAX_VALUE
-                TriggerRepeat.FIXED_COUNT -> if (a.fired >= a.zone.repeatCount) Long.MIN_VALUE else Long.MAX_VALUE
+            val maxFires = when (a.zone.repeat) {
+                TriggerRepeat.FIXED_COUNT -> a.zone.repeatCount
+                TriggerRepeat.WHILE_HELD -> Int.MAX_VALUE
             }
-            if (deadline == Long.MIN_VALUE) {
-                active.remove(pid)
+            if (a.fired >= maxFires) {
+                finished += pid
                 continue
             }
             val elapsed = nowMs - a.startMs
             val period = a.zone.tapIntervalMs.coerceAtLeast(1)
-            val expected = (elapsed / period).toInt() + 1
-            while (a.fired < expected) {
+            val expected = (elapsed / period).toInt()
+            val target = minOf(expected, maxFires)
+            while (a.fired < target) {
                 a.fired++
-                val downAt = a.startMs + (a.fired - 1) * period
+                val downAt = a.startMs + a.fired * period
                 out += Tap(a.x, a.y, down = true, atMs = downAt)
                 out += Tap(a.x, a.y, down = false, atMs = downAt + a.zone.tapDurationMs.coerceIn(1, period))
             }
+            if (a.fired >= maxFires) {
+                finished += pid
+            }
         }
+        finished.forEach { active.remove(it) }
         return out.sortedBy { it.atMs }
     }
 }

@@ -50,7 +50,7 @@ class ImportActivity : Activity() {
         val pm = packageManager
         val launchables = pm.queryIntentActivities(
             Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER),
-            PackageManager.MatchAll,
+            PackageManager.MATCH_ALL,
         ).distinctBy { it.activityInfo.packageName }
             .filter { it.activityInfo.packageName != packageName }
             .sortedBy { it.loadLabel(pm).toString().lowercase() }

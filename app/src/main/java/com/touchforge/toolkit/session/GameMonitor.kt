@@ -86,10 +86,10 @@ class GameMonitor @Inject constructor(
             val usm = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
             while (isActive) {
                 val now = System.currentTimeMillis()
-                val events = UsageEvents().also { usm.queryEvents(now - intervalMs * 2, now, it) }
+                val events = usm.queryEvents(now - intervalMs * 2, now)
                 var foreground: String? = null
                 val e = UsageEvents.Event()
-                while (events.hasNextEvent()) {
+                while (events?.hasNextEvent() == true) {
                     events.getNextEvent(e)
                     if (e.eventType == UsageEvents.Event.ACTIVITY_RESUMED) {
                         foreground = e.packageName

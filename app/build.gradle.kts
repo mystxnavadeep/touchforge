@@ -47,6 +47,11 @@ android {
     }
     packaging { resources.excludes += "META-INF/{AL2.0,LGPL2.1}" }
     testOptions { unitTests.isIncludeAndroidResources = false }
+    lint {
+        abortOnError = true
+        checkReleaseBuilds = false
+        disable += listOf("MissingTranslation", "ExtraTranslation")
+    }
 }
 
 dependencies {

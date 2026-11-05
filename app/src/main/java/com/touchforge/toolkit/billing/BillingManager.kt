@@ -13,6 +13,7 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import com.android.billingclient.api.queryProductDetails
 import com.touchforge.toolkit.core.gate.Tier
 import com.touchforge.toolkit.data.SettingsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext

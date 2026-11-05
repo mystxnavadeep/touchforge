@@ -3,6 +3,7 @@ package com.touchforge.toolkit.helper
 import android.content.Context
 import android.os.Binder
 import android.os.IBinder
+import android.os.Parcel
 import com.touchforge.toolkit.aidl.IToolkitCallback
 import com.touchforge.toolkit.aidl.IToolkitService
 import com.touchforge.toolkit.aidl.TouchSpec
@@ -56,7 +57,7 @@ class ToolkitUserService(private val context: Context?) : IToolkitService.Stub()
     }
 
     /** Only our app may talk to this binder. */
-    override fun onTransact(code: Int, data: IBinder, reply: IBinder?, flags: Int): Boolean {
+    override fun onTransact(code: Int, data: Parcel, reply: Parcel?, flags: Int): Boolean {
         val ctx = context
         if (ctx != null) {
             val uid = Binder.getCallingUid()

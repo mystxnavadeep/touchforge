@@ -29,8 +29,8 @@ object UpdateChecker {
     }
 
     fun isUpdateAvailable(current: String, latestTag: String): Boolean {
-        val c = parse(current) ?: return false
-        val l = parse(latestTag) ?: return false
+        val c = SemVer.parse(current) ?: return false
+        val l = SemVer.parse(latestTag) ?: return false
         return l > c
     }
 

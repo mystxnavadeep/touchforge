@@ -67,7 +67,7 @@ class GamesViewModel @Inject constructor(
         profiles.observeProfiles().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     fun installedApps(pm: PackageManager): List<AppEntry> =
-        pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), PackageManager.MatchAll)
+        pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), PackageManager.MATCH_ALL)
             .asSequence()
             .filter { it.activityInfo.packageName != "com.touchforge.toolkit" }
             .distinctBy { it.activityInfo.packageName }
