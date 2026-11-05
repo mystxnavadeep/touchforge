@@ -45,7 +45,7 @@ class MacroPlayer(private val macro: MacroDef) {
     val durationMs: Long = timeline.maxOfOrNull { it.atMs } ?: 0L
 
     companion object {
-        fun buildTimeline(macro: MacroDef): List<Timed> {
+        private fun buildTimeline(macro: MacroDef): List<Timed> {
             val out = ArrayList<Timed>()
             var t = 0L
             val passes = if (macro.loop) 1 else 1 // loops handled by caller restarting the player

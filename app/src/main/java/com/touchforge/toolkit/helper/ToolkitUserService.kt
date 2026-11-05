@@ -76,9 +76,9 @@ class ToolkitUserService(private val context: Context?) : IToolkitService.Stub()
     override fun execCommand(command: String): String {
         if (!CommandPolicy.isAllowed(command)) return ""
         return runCatching {
-            val parts = command.trim().split(Regex("\\s+"))
+            val parts: List<String> = command.trim().split(Regex("\\s+"))
             val proc = ProcessBuilder(parts).redirectErrorStream(true).start()
-            val out = proc.inputStream.buffered().readText()
+            val out = proc.inputStream.bufferedReader().use { it.readText() }
             proc.waitFor(5, TimeUnit.SECONDS)
             out
         }.getOrDefault("")

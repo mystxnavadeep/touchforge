@@ -34,6 +34,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -125,8 +126,8 @@ class OverlayHostService : Service() {
                 v.config = cs
                 val size = (cs.size * resources.displayMetrics.widthPixels).toInt().coerceAtLeast(24)
                 val p = overlayParams(cs.x - cs.size / 2f, cs.y - cs.size / 2f, size, size, touchable = true)
-                v.setOnDragListener { dx, dy ->
-                    val cur = v.tag as? WindowManager.LayoutParams ?: return@setOnDragListener
+                v.setTouchDragListener { dx, dy ->
+                    val cur = v.tag as? WindowManager.LayoutParams ?: return@setTouchDragListener
                     cur.x += dx; cur.y += dy
                     runCatching { wm.updateViewLayout(v, cur) }
                     scope.launch {
@@ -240,7 +241,7 @@ class OverlayHostService : Service() {
 /** Drag-and-drop listener: reports pixel deltas while the user drags a window. */
 private typealias DragListener = (dx: Int, dy: Int) -> Unit
 
-private fun View.setOnDragListener(listener: DragListener) {
+private fun View.setTouchDragListener(listener: DragListener) {
     var lastX = 0f
     var lastY = 0f
     setOnTouchListener { v, e ->

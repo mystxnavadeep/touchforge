@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -50,8 +51,8 @@ class ConnectViewModel @Inject constructor(
             add(session.exec("cat /proc/stat")?.lineSequence()?.firstOrNull() ?: "cat /proc/stat: unavailable")
             add("shell uid: ${session.service?.shellUid ?: "-"}")
             add("protocol: ${session.service?.protocolVersion ?: "-"}")
-            add("inject: ${session.service?.canInjectProbe ?: false}")
-            add("grab lib: ${session.service?.canGrabProbe ?: false}")
+            add("inject: ${session.service?.canInjectProbe() ?: false}")
+            add("grab lib: ${session.service?.canGrabProbe() ?: false}")
         }
         onResult(lines)
     }

@@ -92,7 +92,7 @@ class BillingManager @Inject constructor(
             .build()
         val (result, list) = client.queryProductDetails(params)
         if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-            _products.value = list.filterIsInstance<ProductDetails>()
+            _products.value = list?.filterIsInstance<ProductDetails>() ?: emptyList()
         }
     }
 

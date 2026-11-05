@@ -116,8 +116,8 @@ class SessionManager @Inject constructor(
         val canExec = runCatching {
             svc.isCommandAllowed("cat /proc/stat") && svc.execCommand("cat /proc/stat").isNotBlank()
         }.getOrDefault(false)
-        val canInject = runCatching { svc.canInjectProbe }.getOrDefault(false)
-        val canGrab = runCatching { svc.canGrabProbe }.getOrDefault(false)
+        val canInject = runCatching { svc.canInjectProbe() }.getOrDefault(false)
+        val canGrab = runCatching { svc.canGrabProbe() }.getOrDefault(false)
         val caps = CapabilityReport(
             hasShellSession = true,
             canExec = canExec,
