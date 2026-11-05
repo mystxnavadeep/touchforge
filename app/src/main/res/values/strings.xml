@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TouchForge</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_games">Games</string>
+    <string name="tab_connect">Connect</string>
+    <string name="tab_account">Account</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- Session -->
+    <string name="session_status">Session</string>
+    <string name="session_connected">Connected (shell uid %1$d)</string>
+    <string name="session_connecting">Connecting…</string>
+    <string name="session_idle">Not connected</string>
+    <string name="session_failed">Failed: %1$s</string>
+    <string name="open_connect">Open Connect</string>
+    <string name="stop_all">Stop &amp; restore</string>
+    <string name="restore_changes">Restore guarded changes</string>
+
+    <!-- Home -->
+    <string name="global_sensitivity">Global sensitivity</string>
+    <string name="sensitivity_tier_note">Current %1$.2f · your tier limit is %2$.2f</string>
+    <string name="quick_toggles">Quick toggles</string>
+    <string name="show_touches">Show touches</string>
+    <string name="crosshair">Crosshair</string>
+    <string name="hud">Performance HUD</string>
+    <string name="capabilities">Capabilities on this device</string>
+    <string name="resolution_scale">Resolution scale</string>
+    <string name="resolution_current">Current: %1$dx%2$d</string>
+    <string name="resolution_warning">Changing resolution affects the whole device. The original value is stored and restored automatically when the session stops or the helper is killed.</string>
+    <string name="resolution_target">New: %1$dx%2$d</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <!-- Connect -->
+    <string name="connect_shizuku">Shizuku</string>
+    <string name="shizuku_missing">Shizuku app is not installed or not running. Install it, start it (wireless debugging or ADB), then retry.</string>
+    <string name="shizuku_needs_permission">Shizuku is running but TouchForge has no permission yet.</string>
+    <string name="shizuku_ready">Shizuku is ready.</string>
+    <string name="shizuku_open_site">Open shizuku.rikka.app</string>
+    <string name="shizuku_grant">Grant permission</string>
+    <string name="connect_start">Connect helper</string>
+    <string name="connect_stop">Stop helper</string>
+    <string name="connect_state">Helper state</string>
+    <string name="connect_state_ok">Connected · protocol %1$d · uid %2$d</string>
+    <string name="diagnostics_run">Run diagnostics</string>
+    <string name="safety_title">Safety</string>
+    <string name="safety_watchdog">The helper watchdog restores every guarded change (show touches, rotation, resolution) if the app stops heartbeating, the session dies, or the helper is destroyed.</string>
+
+    <!-- Games -->
+    <string name="game_library">Game library</string>
+    <string name="add_game">Add game</string>
+    <string name="no_games">No games yet. Add one to create a profile.</string>
+    <string name="pick_app">Pick an app</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="editor_title">Profile: %1$s</string>
+    <string name="editor_selected">Selected zone %1$s — drag on canvas to create a new zone</string>
+    <string name="delete_zone">Delete zone</string>
+    <string name="save">Save</string>
+    <string name="editor_hint">Zones are stored as fractions of the screen, so they adapt to any resolution. Sensitivity displaces touches away from the zone center.</string>
+
+    <!-- Account -->
+    <string name="account_tier">Tier</string>
+    <string name="account_limits">Max sensitivity %1$.1f · max zones %2$d</string>
+    <string name="account_credits">Credits</string>
+    <string name="credits_balance">Balance: %1$d</string>
+    <string name="credits_wait">Next claim in %1$d s</string>
+    <string name="credits_claim">Claim +5</string>
+    <string name="credits_ads_note">Credits are local. This open build has no ads configured; rewarded-credit ads are optional and off by default.</string>
+    <string name="account_upgrade">Upgrade</string>
+    <string name="billing_unavailable">Play Billing unavailable in this build/device.</string>
+    <string name="billing_restore">Restore purchases</string>
+    <string name="buy">Buy</string>
+
+    <!-- Settings -->
+    <string name="settings_hud">HUD</string>
+    <string name="hud_interval">Refresh interval (ms)</string>
+    <string name="hud_opacity">Opacity</string>
+    <string name="settings_crosshair">Crosshair</string>
+    <string name="crosshair_size">Size</string>
+    <string name="settings_mappings">Mappings</string>
+    <string name="export">Export</string>
+    <string name="import_title">Import</string>
+    <string name="import_pick_target">Pick the target game</string>
+    <string name="import_ok">Mapping imported</string>
+    <string name="import_invalid">Not a valid TouchForge mapping</string>
+    <string name="import_read_failed">Could not read the file</string>
+    <string name="settings_about">About</string>
+    <string name="version">Version %1$s</string>
+    <string name="changelog">Changelog</string>
+    <string name="changelog_body">0.1.0 — First build: Shizuku helper, capability matrix, global/zone sensitivity (injected-touch path), triggers, HUD, crosshair, resolution guard, mappings import/export.</string>
+    <string name="check_updates">Check updates</string>
+    <string name="language_note">System language is used. Per-app language switching is planned (API 33+ LocaleManager).</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel">TouchForge session</string>
+    <string name="notif_title">TouchForge active</string>
+    <string name="notif_text">Toolkit session running. Tap to stop from the app.</string>
+</resources>
